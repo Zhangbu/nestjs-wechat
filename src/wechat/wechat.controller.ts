@@ -1,4 +1,4 @@
-import { Controller, Get, Req, Res, Post, Body, HttpStatus } from '@nestjs/common';
+import { Controller, Get, Req, Res, Post, Body, HttpStatus,Param } from '@nestjs/common';
 import { finished } from 'stream';
 import { create } from 'domain';
 
@@ -6,8 +6,9 @@ import { create } from 'domain';
 @Controller('wechat')
 export class WechatController {
     @Get()
-    async checkwx(@Req() request): Promise<any[]> {
-        var a: any = true;
+    async checkwx(@Param('echostr') echostr,@Req() request): Promise<any[]> {
+        var a = request.query.echostr;
+        console.log(request.query.echostr)
         return a;
     }
 
