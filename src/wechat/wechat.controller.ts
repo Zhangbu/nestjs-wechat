@@ -2,7 +2,7 @@ import { Controller, Get, Req, Res, Post, Body, HttpStatus,Param } from '@nestjs
 import { finished } from 'stream';
 import { create } from 'domain';
 import { response } from 'express';
-
+var parseString = require('xml2js').parseString;
 
 @Controller('wechat')
 export class WechatController {
@@ -28,7 +28,9 @@ export class WechatController {
             })
         })
         console.log(wxEventMsg);
-        
+        parseString(wxEventMsg, function (err, result) {
+            console.dir(JSON.stringify(result));
+        });
         response.setHeader('content-type', 'text/xml'); 
         response.send("success"); 
     }
