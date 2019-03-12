@@ -1,6 +1,7 @@
 import { Controller, Get, Req, Res, Post, Body, HttpStatus,Param } from '@nestjs/common';
 import { finished } from 'stream';
 import { create } from 'domain';
+import { response } from 'express';
 
 
 @Controller('wechat')
@@ -13,7 +14,7 @@ export class WechatController {
     }
 
     @Post()
-    async create(@Req() request) {
+    async create(@Req() request,@Res() response) {
         console.log("这里是post的方法，为了获取微信的消息")
 
         let wxEventMsg = await new Promise(function (resolve, reject) {
@@ -28,6 +29,7 @@ export class WechatController {
         })
         console.log(wxEventMsg);
         
-        return 'success';
+        response.setHeader('content-type', 'text/xml'); 
+        response.send("success"); 
     }
 }
