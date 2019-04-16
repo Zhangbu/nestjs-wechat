@@ -8,4 +8,4 @@ import {WechatService} from './wechat.service';
     exports:[WechatService]
 })
 
-export class WechatModule{}
+export class WechatModule{}        

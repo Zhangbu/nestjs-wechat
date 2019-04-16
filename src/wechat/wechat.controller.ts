@@ -3,7 +3,7 @@ import { finished } from 'stream';
 import { create } from 'domain';
 import { response } from 'express';
 var parseString = require('xml2js').parseString;
-
+var fastXmlParser = require('fast-xml-parser');
 @Controller('wechat')
 export class WechatController {
     @Get('/checkwx')
@@ -31,6 +31,9 @@ export class WechatController {
         parseString(wxEventMsg, function (err, result) {
             console.dir(JSON.stringify(result));
         });
+        var wxEventMsgJson = fastXmlParser.getTraversalObj(wxEventMsg);
+        var wxEventMsgXml = fastXmlParser.convertToJson(wxEventMsgJson)
+        console.log(wxEventMsgJson,wxEventMsgXml)
         response.setHeader('content-type', 'text/xml'); 
         response.send("success"); 
     }
