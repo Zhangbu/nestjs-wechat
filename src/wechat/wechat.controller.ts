@@ -20,4 +20,12 @@ export class WechatController {
     var str = this.wechatService.wechatCheck(echostr);
     return str;
   }
+
+  @Post("check")
+  wechatPostCheck(@Query("echostr") echostr): string {
+      console.log(echostr)
+
+    var str = this.wechatService.wechatCheck(echostr);
+    return str;
+  }
 }
